@@ -6,7 +6,9 @@ Here are just some scripts and hacks to facilitate better self-hosting of large 
 # interstitial_API - a relay for pseudo-OpenAI-compatible LLM APIs
 
 interstitial_API is essentially a live streaming relay for API calls to allow two things:
+
     1. the use of partially-OpenAI-compatible APIs that do not have fully defined endpoints (e.g. they are missing /v1/models), and
+    
     2. inject prompts in between user and assistant messages, to stop the AI from auto-completing user messages or carrying on a conversation with itself.
 
 It is lightweight and designed to be run on the same system where the models are actually run. On my MacBook M1 Max it uses ~1.5% of a single CPU thread under load and never has used more than 0.1% of my 64GB of system memory.
@@ -17,6 +19,7 @@ To set it up on your machine, read on. Note tese instructions are generally for 
 ## PREREQUISITES
 
 You should have Python 3.7 or higher installed on your system. Linux users should have it already or else know how to get it, Mac and Windows users can download Python from [the official website](https://www.python.org/downloads/). Mac users can also get it using Homebrew if they prefer:
+
 ```bash
     brew install python
 ```
@@ -95,8 +98,11 @@ Now you can run that script once with `./start_interstitial_API.sh` in Terminal,
 ### 5.     **(Optional) Start the relay when you log into your Mac**
    
 To further reduce friction, you can have this script run quietly on login ensuring the API is always up unless you manually kill it.
+
 a. Open "System Preferences" and find "Login Items" within "General" (or within "Users & Groups" > your user account on older versions of MacOS).
+
 b. Click on the '+' button to add a new login item.
+
 c. Navigate to `start_interstitial_API.sh` and select it and click "Add".
 
 Now your script should run each time you log into your macOS user account.
