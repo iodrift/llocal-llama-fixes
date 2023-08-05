@@ -51,6 +51,7 @@ You'll also need to chmod it:
 ### 3.     **(Test) Run the API server**
 
 You can now run the relay server using Uvicorn with the following command:
+
     ```bash
     uvicorn interstitial_API:app --port 3456
     ```
@@ -77,9 +78,7 @@ curl http://localhost:6789/v1/chat/completions \
 
 ### 4.     **Make it run without a terminal open**
 
-If you don't want to have to keep a terminal open running uvicorn, continue by creating a script (your home folder is a good place for it). TextEdit should work, just make sure it actually uses .sh as the extension and not .sh.txt (you can also create it in terminal with `touch start_app.sh`). This script is in this repo as `start_interstitial_API.sh`.
-
-The contents of the script:
+If you don't want to have to keep a terminal open running uvicorn, grab `start_interstitial_API.sh` or recreate it yourself with the following: 
 
 ```bash
     #!/bin/bash
@@ -87,13 +86,13 @@ The contents of the script:
  ```
 
 Once you've saved your script in your home folder, chmod it in Terminal:
+
 ```bash
     chmod +x start_interstitial_API.sh
 ```
 
-Now you can run that script once with `./start_interstitial_API.sh` in Terminal, and it should continue running after you close Terminal, until you reboot or otherwise kill it.
+Now you can run that script once with `./start_interstitial_API.sh` in Terminal, and it should continue running after you close Terminal, until you reboot or otherwise kill it (see #7)
 
-***Note: to stop the relay, enter `kill -9 $(ps aux | grep '[i]nterstitial_API:app' | awk '{print $2}')` in the Terminal.
 
 ### 5.     **(Optional) Start the relay when you log into your Mac**
    
@@ -107,7 +106,19 @@ c. Navigate to `start_interstitial_API.sh` and select it and click "Add".
 
 Now your script should run each time you log into your macOS user account.
 
+### 6. Kill interstitial_API
+
+If you're running interstitial_API through uvicorn and want to kill the process, enter the following in Terminal:
+
+```bash
+kill -9 $(ps aux | grep '[i]nterstitial_API:app' | awk '{print $2}')
+```
+
 
 ## **MODIFICATIONS**
 
-As noted you can simply edit your local `interstitial_API.py` to change the server or port of the destination API, at line 23, and edit the injected system messages before user and assistant messages at lines 54 and 55, accordingly. Check your model's card on HuggingFace to find what prompt syntax it responds to.
+As noted you can simply edit your local `interstitial_API.py` to change the server or port of the destination API, at line 23.
+
+To edit system messages injected before after assistant and user messages, edit the text on lines 54 and 55, respectively. 
+
+I have them set to ### Instruction: and ### Response:  which are common on llama models, but check your model's card on HuggingFace if it isn't behaving as expected.
